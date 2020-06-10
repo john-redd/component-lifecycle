@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import ComponentLifeCycle from './components/ComponentLifeCycle'
+import ToggleMount from './components/ToggleMount'
+import './App.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      isMounted: true
+    }
+  }
+
+  toggleMount = () => {
+    this.setState({
+      isMounted: !this.state.isMounted
+    })
+  }
+  render() {
+    return (
+      <div className="App">
+        {this.state.isMounted && <ComponentLifeCycle />}
+        <ToggleMount
+          isMounted={this.state.isMounted}
+          toggleMount={this.toggleMount}
+        />
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
